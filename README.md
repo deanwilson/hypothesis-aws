@@ -76,6 +76,20 @@ An example of a full run:
     Trying example: test_display_region(region='me-northwest-4')
     Trying example: test_display_region(region='sa-gov-southeast-4')
 
+### Fake instance IDs
+
+This strategy creates fake instance IDs of either 8 characters, 17 characters or a
+mixture of both.
+
+    pytest example/show-instance-ids.py --hypothesis-show-statistics -s
+
+    Trying example: test_all_instance_ids(instance_id='i-qad01000aa11000a1')
+    Trying example: test_all_instance_ids(instance_id='i-01da0101')
+    Trying example: test_all_instance_ids(instance_id='i-td01d0d00000a1dd0')
+    Trying example: test_all_instance_ids(instance_id='i-10d010d1')
+    Trying example: test_all_instance_ids(instance_id='i-t6aa10dd0d01adaa0')
+    Trying example: test_all_instance_ids(instance_id='i-5d0d0dda')
+
 ### Author
 
  * [Dean Wilson](https://www.unixdaemon.net)
