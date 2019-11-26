@@ -1,4 +1,5 @@
-from hypothesis.strategies import from_regex, sampled_from
+from hypothesis.strategies import from_regex, sampled_from, one_of
+from hypothesis.errors import InvalidArgument
 import re
 
 
@@ -30,6 +31,7 @@ def regions():
     ]
 
     return sampled_from(real_regions)
+
 
 def fake_regions():
     """Generate fake regions that match the AWS region naming format"""
@@ -70,3 +72,31 @@ def fake_regions():
     )
 
     return from_regex(pattern, fullmatch=True)
+
+
+def fake_instance_ids(id_type="all"):
+    """Generate fake AWS instance ID values.
+
+    :param id_type: type of instance id to generate.
+      Can be id_type="short" for 8 character IDs (mostly deprecated),
+      id_type="long" for 17 character IDS or id_type="all" for a mix of each.
+
+    The length of the alphanumeric character combination was in an 8-character
+    format; the new IDs are in a 17-character format, for example,
+    i-1234567890abcdef0 for an instance ID.
+    """
+
+    long_pattern = re.compile("i-[a-z0-9]{17}")
+    short_pattern = re.compile("i-[a-z0-9]{8}")
+
+    if id_type == "long":
+        return from_regex(long_pattern, fullmatch=True)
+    elif id_type == "short":
+        return from_regex(short_pattern, fullmatch=True)
+    elif id_type == "all":
+        return one_of(
+            from_regex(long_pattern, fullmatch=True),
+            from_regex(short_pattern, fullmatch=True),
+        )
+    else:
+        raise InvalidArgument(f"{id_type} is an invalid argument")
