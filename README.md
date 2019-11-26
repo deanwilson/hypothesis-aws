@@ -35,8 +35,9 @@ A hypothesis extension that provides AWS related strategies
 
 ## Strategies
 
- * Real Regions
- * Fake Regions
+ * [Real Regions](#real-regions)
+ * [Fake Regions](#fake-regions)
+ * [Fake instance IDs](#fake-instance-ids)
 
 ### Real regions
 
