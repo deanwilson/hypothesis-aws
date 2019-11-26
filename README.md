@@ -64,6 +64,8 @@ regions) AWS region names. It uses the rules all the current regions conform to 
  * hyphen
  * single digit - 1-9
 
+An example of a full run:
+
     pytest example/show-regions.py --hypothesis-show-statistics -s
 
     example/show-regions.py Trying example: test_display_region(region='ap-central-1')
